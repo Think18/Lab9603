@@ -1,0 +1,722 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "0.0.1",
+    "title": "payment-network"
+  },
+  "host": "172.18.0.1:3000",
+  "schemes": [
+    "http"
+  ],
+  "basePath": "/api",
+  "paths": {
+    "/system/ping": {
+      "get": {
+        "tags": ["System"],
+        "summary": "Test the connection to the business network",
+        "operationId": "System.ping",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Request was successful",
+            "schema": {
+              "$ref": "#/definitions/PingResponse"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/system/identities": {
+      "get": {
+        "tags": ["System"],
+        "summary": "Get all identities from the identity registry",
+        "operationId": "System.getAllIdentities",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Request was successful",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/system/identities/{id}": {
+      "get": {
+        "tags": ["System"],
+        "summary": "Get the specified identity from the identity registry",
+        "operationId": "System.getIdentityByID",
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "Request was successful",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/system/identities/issue": {
+      "post": {
+        "tags": ["System"],
+        "summary": "Issue an identity to the specified participant",
+        "operationId": "System.issueIdentity",
+        "parameters": [{
+          "name": "data",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/IssueIdentityRequest"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Request was successful",
+            "schema": {
+              "type": "file"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/system/identities/bind": {
+      "post": {
+        "tags": ["System"],
+        "summary": "Bind an identity to the specified participant",
+        "operationId": "System.bindIdentity",
+        "parameters": [{
+          "name": "data",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/BindIdentityRequest"
+          }
+        }],
+        "responses": {
+          "204": {
+            "description": "Request was successful"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/system/identities/{id}/revoke": {
+      "post": {
+        "tags": ["System"],
+        "summary": "Revoke the specified identity",
+        "operationId": "System.revokeIdentity",
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "204": {
+            "description": "Request was successful"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/system/historian": {
+      "get": {
+        "tags": ["System"],
+        "summary": "Get all Historian Records from the Historian",
+        "operationId": "System.getAllHistorianRecords",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Request was successful",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/system/historian/{id}": {
+      "get": {
+        "tags": ["System"],
+        "summary": "Get the specified Historian Record from the Historian",
+        "operationId": "System.getHistorianRecordByID",
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "Request was successful",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/AccountHolder": {
+      "post": {
+        "tags": ["AccountHolder"],
+        "summary": "Create a new instance of the model and persist it into the data source.",
+        "operationId": "AccountHolder.create",
+        "parameters": [{
+          "name": "data",
+          "in": "body",
+          "description": "Model instance data",
+          "required": false,
+          "schema": {
+            "description": "Model instance data",
+            "$ref": "#/definitions/AccountHolder"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Request was successful",
+            "schema": {
+              "$ref": "#/definitions/AccountHolder"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "get": {
+        "tags": ["AccountHolder"],
+        "summary": "Find all instances of the model matched by filter from the data source.",
+        "operationId": "AccountHolder.find",
+        "parameters": [{
+          "name": "filter",
+          "in": "query",
+          "description": "Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({\"something\":\"value\"})",
+          "required": false,
+          "type": "string",
+          "format": "JSON"
+        }],
+        "responses": {
+          "200": {
+            "description": "Request was successful",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AccountHolder"
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/AccountHolder/{id}": {
+      "head": {
+        "tags": ["AccountHolder"],
+        "summary": "Check whether a model instance exists in the data source.",
+        "operationId": "AccountHolder.exists",
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "Model id",
+          "required": true,
+          "type": "string",
+          "format": "JSON"
+        }],
+        "responses": {
+          "200": {
+            "description": "Request was successful",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "exists": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "get": {
+        "tags": ["AccountHolder"],
+        "summary": "Find a model instance by {{id}} from the data source.",
+        "operationId": "AccountHolder.findById",
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "Model id",
+          "required": true,
+          "type": "string",
+          "format": "JSON"
+        }, {
+          "name": "filter",
+          "in": "query",
+          "description": "Filter defining fields and include - must be a JSON-encoded string ({\"something\":\"value\"})",
+          "required": false,
+          "type": "string",
+          "format": "JSON"
+        }],
+        "responses": {
+          "200": {
+            "description": "Request was successful",
+            "schema": {
+              "$ref": "#/definitions/AccountHolder"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": ["AccountHolder"],
+        "summary": "Replace attributes for a model instance and persist it into the data source.",
+        "operationId": "AccountHolder.replaceById",
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "Model id",
+          "required": true,
+          "type": "string",
+          "format": "JSON"
+        }, {
+          "name": "data",
+          "in": "body",
+          "description": "Model instance data",
+          "required": false,
+          "schema": {
+            "description": "Model instance data",
+            "$ref": "#/definitions/AccountHolder"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Request was successful",
+            "schema": {
+              "$ref": "#/definitions/AccountHolder"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": ["AccountHolder"],
+        "summary": "Delete a model instance by {{id}} from the data source.",
+        "operationId": "AccountHolder.deleteById",
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "Model id",
+          "required": true,
+          "type": "string",
+          "format": "JSON"
+        }],
+        "responses": {
+          "200": {
+            "description": "Request was successful",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/Account": {
+      "post": {
+        "tags": ["Account"],
+        "summary": "Create a new instance of the model and persist it into the data source.",
+        "operationId": "Account.create",
+        "parameters": [{
+          "name": "data",
+          "in": "body",
+          "description": "Model instance data",
+          "required": false,
+          "schema": {
+            "description": "Model instance data",
+            "$ref": "#/definitions/Account"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Request was successful",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "get": {
+        "tags": ["Account"],
+        "summary": "Find all instances of the model matched by filter from the data source.",
+        "operationId": "Account.find",
+        "parameters": [{
+          "name": "filter",
+          "in": "query",
+          "description": "Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({\"something\":\"value\"})",
+          "required": false,
+          "type": "string",
+          "format": "JSON"
+        }],
+        "responses": {
+          "200": {
+            "description": "Request was successful",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Account"
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/Account/{id}": {
+      "head": {
+        "tags": ["Account"],
+        "summary": "Check whether a model instance exists in the data source.",
+        "operationId": "Account.exists",
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "Model id",
+          "required": true,
+          "type": "string",
+          "format": "JSON"
+        }],
+        "responses": {
+          "200": {
+            "description": "Request was successful",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "exists": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "get": {
+        "tags": ["Account"],
+        "summary": "Find a model instance by {{id}} from the data source.",
+        "operationId": "Account.findById",
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "Model id",
+          "required": true,
+          "type": "string",
+          "format": "JSON"
+        }, {
+          "name": "filter",
+          "in": "query",
+          "description": "Filter defining fields and include - must be a JSON-encoded string ({\"something\":\"value\"})",
+          "required": false,
+          "type": "string",
+          "format": "JSON"
+        }],
+        "responses": {
+          "200": {
+            "description": "Request was successful",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": ["Account"],
+        "summary": "Replace attributes for a model instance and persist it into the data source.",
+        "operationId": "Account.replaceById",
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "Model id",
+          "required": true,
+          "type": "string",
+          "format": "JSON"
+        }, {
+          "name": "data",
+          "in": "body",
+          "description": "Model instance data",
+          "required": false,
+          "schema": {
+            "description": "Model instance data",
+            "$ref": "#/definitions/Account"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Request was successful",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": ["Account"],
+        "summary": "Delete a model instance by {{id}} from the data source.",
+        "operationId": "Account.deleteById",
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "Model id",
+          "required": true,
+          "type": "string",
+          "format": "JSON"
+        }],
+        "responses": {
+          "200": {
+            "description": "Request was successful",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/TransferMoney": {
+      "post": {
+        "tags": ["TransferMoney"],
+        "summary": "Create a new instance of the model and persist it into the data source.",
+        "operationId": "TransferMoney.create",
+        "parameters": [{
+          "name": "data",
+          "in": "body",
+          "description": "Model instance data",
+          "required": false,
+          "schema": {
+            "description": "Model instance data",
+            "$ref": "#/definitions/TransferMoney"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Request was successful",
+            "schema": {
+              "$ref": "#/definitions/TransferMoney"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "get": {
+        "tags": ["TransferMoney"],
+        "summary": "Find all instances of the model matched by filter from the data source.",
+        "operationId": "TransferMoney.find",
+        "parameters": [{
+          "name": "filter",
+          "in": "query",
+          "description": "Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({\"something\":\"value\"})",
+          "required": false,
+          "type": "string",
+          "format": "JSON"
+        }],
+        "responses": {
+          "200": {
+            "description": "Request was successful",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/TransferMoney"
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/TransferMoney/{id}": {
+      "get": {
+        "tags": ["TransferMoney"],
+        "summary": "Find a model instance by {{id}} from the data source.",
+        "operationId": "TransferMoney.findById",
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "Model id",
+          "required": true,
+          "type": "string",
+          "format": "JSON"
+        }, {
+          "name": "filter",
+          "in": "query",
+          "description": "Filter defining fields and include - must be a JSON-encoded string ({\"something\":\"value\"})",
+          "required": false,
+          "type": "string",
+          "format": "JSON"
+        }],
+        "responses": {
+          "200": {
+            "description": "Request was successful",
+            "schema": {
+              "$ref": "#/definitions/TransferMoney"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    }
+  },
+  "tags": [{
+    "name": "System",
+    "description": "General business network methods"
+  }, {
+    "name": "AccountHolder",
+    "description": "A participant named AccountHolder"
+  }, {
+    "name": "Account",
+    "description": "An asset named Account"
+  }, {
+    "name": "TransferMoney",
+    "description": "A transaction named TransferMoney"
+  }],
+  "consumes": ["application/json", "application/x-www-form-urlencoded", "application/xml", "text/xml"],
+  "produces": ["application/json", "application/xml", "text/xml", "application/javascript", "text/javascript"],
+  "definitions": {
+    "PingResponse": {
+      "description": "The response to the ping method",
+      "properties": {
+        "participant": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "required": ["version"],
+      "additionalProperties": false
+    },
+    "IssueIdentityRequest": {
+      "description": "The request to the issueIdentity method",
+      "properties": {
+        "participant": {
+          "type": "string"
+        },
+        "userID": {
+          "type": "string"
+        },
+        "options": {
+          "type": "object"
+        }
+      },
+      "required": ["participant", "userID"],
+      "additionalProperties": false
+    },
+    "BindIdentityRequest": {
+      "description": "The request to the bindIdentity method",
+      "properties": {
+        "participant": {
+          "type": "string"
+        },
+        "certificate": {
+          "type": "string"
+        }
+      },
+      "required": ["certificate"],
+      "additionalProperties": false
+    },
+    "AccountHolder": {
+      "description": "A participant named AccountHolder",
+      "properties": {
+        "$class": {
+          "default": "com.ibm.payments.AccountHolder",
+          "description": "The class identifier for this type",
+          "type": "string"
+        },
+        "email": {
+          "description": "The instance identifier for this type",
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        }
+      },
+      "required": ["email", "firstName", "lastName"],
+      "additionalProperties": false
+    },
+    "Account": {
+      "description": "An asset named Account",
+      "properties": {
+        "$class": {
+          "default": "com.ibm.payments.Account",
+          "description": "The class identifier for this type",
+          "type": "string"
+        },
+        "accountId": {
+          "description": "The instance identifier for this type",
+          "type": "string"
+        },
+        "balance": {
+          "type": "number",
+          "format": "double"
+        },
+        "owner": {
+          "description": "The identifier of an instance of owner",
+          "type":"string"
+        }
+      },
+      "required": ["accountId", "balance", "owner"],
+      "additionalProperties": false
+    },
+    "TransferMoney": {
+      "description": "A transaction named TransferMoney",
+      "properties": {
+        "$class": {
+          "default": "com.ibm.payments.TransferMoney",
+          "description": "The class identifier for this type",
+          "type": "string"
+        },
+        "source": {
+          "description": "The identifier of an instance of source",
+          "type" : "string"
+        },
+        "destination": {
+          "description": "The identifier of an instance of destination",
+          "type":"string"
+        },
+        "amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "transactionId": {
+          "description": "The instance identifier for this type",
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["source", "destination", "amount"],
+      "additionalProperties": false
+    }
+  }
+}
